@@ -1,39 +1,38 @@
+/* eslint-disable react/prop-types */
 
-const StepSelector = () => {
+const StepSelector = ({ setStepCount }) => {
+  
+  const stepArray = [
+    {
+      count: 1,
+      title: 'YOUR INFO'
+    },
+    {
+      count: 2,
+      title: 'SELECT PLAN'
+    },
+    {
+      count: 3,
+      title: 'ADD-ONS'
+    },
+    {
+      count: 4,
+      title: 'SUMMARY'
+    }
+  ]
+
   return (
     <div className="step-selectors-container">
       <div className="step-selectors">
-      <div className="step-selector">
-        <div className="step-number">1</div>
+        {stepArray.map(step => (
+        <div className="step-selector" key={step.count} onClick={() => setStepCount(step.count)}>
+            <div className="step-number">{step.count}</div>
         <div className="step-selector-text">
-            <p className="step-number">STEP 1</p>
-            <p className="step-title">YOUR INFO</p>
+              <p className="step-number">STEP {step.count}</p>
+              <p className="step-title">{step.title}</p>
         </div>
       </div>
-
-      <div className="step-selector">
-        <div className="step-number">2</div>
-        <div className="step-selector-text">
-            <p className="step-number">STEP 2</p>
-            <p className="step-title">SELECT PLAN</p>
-        </div>
-      </div>
-
-      <div className="step-selector">
-        <div className="step-number">3</div>
-        <div className="step-selector-text">
-            <p className="step-number">STEP 3</p>
-            <p className="step-title">ADD-ONS</p>
-        </div>
-      </div>
-
-      <div className="step-selector">
-        <div className="step-number">4</div>
-        <div className="step-selector-text">
-            <p className="step-number">STEP 4</p>
-            <p className="step-title">SUMMARY</p>
-        </div>
-      </div>
+      ))}
 
       </div>
       
