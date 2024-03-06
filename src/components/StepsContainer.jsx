@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useReducer} from "react"
 import StepOne from "./StepOne"
+import StepTwo from "./StepTwo";
 
-const StepsContainer = () => {
+const StepsContainer = ({stepCount, subDuration, setSubDuration}) => {
 
   const initialState = [
   {
@@ -11,9 +13,10 @@ const StepsContainer = () => {
     phone: '',
   },
   {
-    step: 'select plan',
+    step: 'Select plan',
     plan: '',
     duration: '',
+    amount: ''
   },
   
   // TODO: add more objects as i build more steps
@@ -50,7 +53,11 @@ const StepsContainer = () => {
     <div className="steps-container">
 
       <div className="step-container">
-      <StepOne handleSubDataUpdate={handleSubDataUpdate} />
+        {stepCount === 1 && <StepOne handleSubDataUpdate={handleSubDataUpdate} />
+        }
+
+        {stepCount === 2 && <StepTwo subDuration={subDuration} setSubDuration={setSubDuration} handleSubDataUpdate={handleSubDataUpdate}  />}
+
       </div>
 
       <div className="next-prev-btns-container">
