@@ -71,7 +71,7 @@ p {
   transition: 0.5s;
 }
 
-.step-number:hover {
+.step-number:hover, .step-number-active {
   background-color: var(--Light-blue);
   border: 2px var(--Light-blue);
   color: var(--Marine-blue);

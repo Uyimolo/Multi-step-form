@@ -13,7 +13,7 @@ function App() {
 
   return (
      <div className="app">
-      <StepSelector setStepCount={setStepCount} />
+      <StepSelector stepCount={stepCount} setStepCount={setStepCount} />
       <StepsContainer stepCount={stepCount} setStepCount={setStepCount}  />
      </div>
   )
