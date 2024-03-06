@@ -12,15 +12,21 @@ const StepOne = ({handleSubDataUpdate}) => {
   return (
     <div className="step">
       <div className="step-info">
+
         <h1>Personal info</h1>
         <p>Please provide your name, email address, and phone number.</p>
+
       </div>
       <form action="" className="step-one-form step-form">
+
         {inputData.map(input => (
-          <div className="form-group" key={input.id}>
+
+        <div className="form-group" key={input.id}>
+          
         <label htmlFor={input.id}>{input.label}</label>
         <input type="text" id={input.id} placeholder={input.placeholder} onChange={(e) => handleSubDataUpdate('Personal info',input.id, e.target.value )} />
-    </div>
+          </div>
+          
         ))}
 
         
