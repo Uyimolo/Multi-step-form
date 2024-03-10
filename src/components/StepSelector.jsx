@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const StepSelector = ({ setStepCount }) => {
+const StepSelector = ({ stepCount, setStepCount }) => {
   
   const stepArray = [
     {
@@ -26,7 +26,7 @@ const StepSelector = ({ setStepCount }) => {
       <div className="step-selectors">
         {stepArray.map(step => (
         <div className="step-selector" key={step.count} onClick={() => setStepCount(step.count)}>
-            <div className="step-number">{step.count}</div>
+            <div className={`step-number ${stepCount === step.count && 'step-number-active'}`}>{step.count}</div>
         <div className="step-selector-text">
               <p className="step-number">STEP {step.count}</p>
               <p className="step-title">{step.title}</p>

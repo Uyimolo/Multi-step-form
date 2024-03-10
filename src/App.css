@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Ubuntu Mono', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 :root {
@@ -28,7 +28,21 @@
 
 p {
   color: var(--Cool-gray);
-  /* font-weight: bold; */
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.small-text {
+  font-size: 0.9rem;
+}
+
+.smaller-text {
+  font-size: 0.7em;
+}
+
+h2 {
+  font-size: 1em;
+  color: var(--Marine-blue);
 }
 
 #root {
@@ -71,7 +85,8 @@ p {
   transition: 0.5s;
 }
 
-.step-number:hover {
+.step-number:hover,
+.step-number-active {
   background-color: var(--Light-blue);
   border: 2px var(--Light-blue);
   color: var(--Marine-blue);
@@ -88,8 +103,8 @@ p {
 }
 
 .step-container {
-  background-color: var(--Light-blue);
-  padding-bottom: 3rem;
+  background-color: var(--Magnolia);
+  min-height: 450px;
 }
 
 .next-prev-btns-container {
@@ -136,7 +151,7 @@ p {
   max-width: 350px;
   border-radius: 0.5rem;
   background-color: var(--White);
-  box-shadow: 2px 2px 10px #00000050;
+  box-shadow: 6px 12px 11px 1px rgba(0, 0, 0, 0.103);
 }
 
 .step-info h1 {
@@ -145,7 +160,7 @@ p {
   font-weight: 700;
 }
 
-.step-one-form {
+.step-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -155,16 +170,17 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  position: relative;
 }
 
 .form-group input {
   padding: 0.7rem;
   border-radius: 0.2rem;
-  border: 2px solid var(--Light-gray);
+  border: 1px solid var(--Light-gray);
 }
 
-.form-group input:hover{
-border-color: var(--Pastel-blue);
+.form-group input:hover {
+  border-color: var(--Pastel-blue);
 }
 
 .form-group input::placeholder {
@@ -176,3 +192,173 @@ border-color: var(--Pastel-blue);
   font-weight: bold;
   font-size: 0.9em;
 }
+
+.form-group .error {
+  border:1px solid var(--Strawberry-red);
+}
+
+.form-group .validated {
+  position: absolute;
+  background-color: rgb(85, 248, 85);
+  width: 1rem;
+  height: 1rem;
+  display: grid;
+  place-content: center;
+  right: 0;
+  border-radius: 50%;
+}
+
+.form-group .error-message {
+  position: absolute;
+  right: 0;
+  color: var(--Strawberry-red);
+}
+
+
+.plan {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--Light-gray);
+  border-radius: 0.5rem;
+  align-items: start;
+}
+
+.plan-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.discount {
+  font-weight: 600;
+  color: var(--Marine-blue);
+}
+
+.month-year {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  background-color: var(--Light-gray);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.month-year-toggler {
+  width: 3rem;
+  height: 1.5rem;
+  padding: 0 0.2rem;
+  background-color: var(--Marine-blue);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+}
+.month-year-indicator {
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--White);
+  border-radius: 50%;
+  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sub-duration-yearly {
+  transform: translateX(1.6rem);
+}
+
+.yearly-plan-active,
+.monthly-plan-active {
+  color: var(--Marine-blue);
+}
+
+.add-on {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--Light-gray);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  position: relative;
+}
+
+.add-on-active,
+.plan-active {
+  background-color: var(--Magnolia);
+}
+
+.pseudo-checkbox {
+  height: 1.1rem;
+  width: 1.1rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--Cool-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-mark-active {
+  background-color: blue;
+}
+
+.add-on-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.06rem;
+}
+
+.add-on-amount {
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  height: fit-content;
+  font-weight: 600;
+  text-align: right;
+  color: var(--Purplish-blue);
+}
+
+.add-on h2 {
+  width: fit-content;
+}
+
+.add-on-description {
+  width: fit-content;
+}
+
+.step-four-form {
+  padding: 1rem;
+  background-color: var(--Magnolia);
+}
+
+.selected-plan {
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: 0.5rem;
+}
+
+.selected-addons {
+  border-top: 2px solid var(--Light-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.selected-addon {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected-addon p:nth-child(2) {
+  color: var(--Marine-blue);
+}
+
+.total-amount {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+
