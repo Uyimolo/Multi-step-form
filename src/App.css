@@ -197,6 +197,17 @@ h2 {
   border:1px solid var(--Strawberry-red);
 }
 
+.form-group .validated {
+  position: absolute;
+  background-color: rgb(85, 248, 85);
+  width: 1rem;
+  height: 1rem;
+  display: grid;
+  place-content: center;
+  right: 0;
+  border-radius: 50%;
+}
+
 .form-group .error-message {
   position: absolute;
   right: 0;

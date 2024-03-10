@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import checkmarkIcon from '../assets/images/icon-checkmark.svg';
 
 const StepOne = ({ handleSubDataUpdate, subData }) => {
   const [inputData, setInputData] = useState([
@@ -33,11 +34,26 @@ const StepOne = ({ handleSubDataUpdate, subData }) => {
     phone: false,
   });
 
-  const handleValidation = (inputId, value) => {
+  useEffect(() => {
+    initialValidation();
+  }, []);
+
+  const initialValidation = () => {
+    inputData.forEach((input) => {
+      const { id, regex } = input;
+      const value = subData[0][id];
+      const validationResult = regex.test(value.trim());
+
+      setValidationState((prevState) => ({
+        ...prevState,
+        [id]: validationResult,
+      }));
+    });
+  };
+
+  const handleValidation = (inputId, value, label) => {
     const index = inputData.findIndex((input) => input.id === inputId);
     const validationResult = inputData[index].regex.test(value.trim());
-
-    // Update the validationState using the functional form of setState
 
     setInputData((prevInput) =>
       prevInput.map((input, i) =>
@@ -45,7 +61,9 @@ const StepOne = ({ handleSubDataUpdate, subData }) => {
           ? {
               ...input,
               errorMessage: `${
-                validationResult ? '' : `Please enter a valid ${inputId}`
+                validationResult
+                  ? ''
+                  : `Please enter a valid ${label.toLowerCase()}`
               }`,
             }
           : input
@@ -87,6 +105,11 @@ const StepOne = ({ handleSubDataUpdate, subData }) => {
             <div className='error-message smaller-text'>
               {input.errorMessage}
             </div>
+            {validationState[input.id] && (
+              <div className='validated'>
+                <img src={checkmarkIcon} alt='' />
+              </div>
+            )}
             <label htmlFor={input.id}>{input.label}</label>
             <input
               type='text'
@@ -101,7 +124,9 @@ const StepOne = ({ handleSubDataUpdate, subData }) => {
               onChange={(e) =>
                 handleSubDataUpdate('Personal info', input.id, e.target.value)
               }
-              onInput={(e) => handleValidation(input.id, e.target.value)}
+              onInput={(e) =>
+                handleValidation(input.id, e.target.value, input.label)
+              }
             />
           </div>
         ))}
