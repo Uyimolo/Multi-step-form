@@ -2,6 +2,8 @@
 import { useEffect, useReducer } from 'react';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import StepThree from './StepThree';
+import StepFour from './StepFour';
 
 const StepsContainer = ({
   stepCount,
@@ -20,26 +22,48 @@ const StepsContainer = ({
     {
       step: 'Select plan',
       plan: '',
-      duration: '',
       amount: '',
-      isValidated: true,
+      isValidated: false,
+    },
+    {
+      step: 'Pick add-ons',
+      pickAddons: {
+        onlineService: { isActive: false, name: 'Online service', amount: 1 },
+        largerStorage: { isActive: false, name: 'Larger storage', amount: 2 },
+        customizableProfile: {
+          isActive: false,
+          name: 'Customizable profile',
+          amount: 1,
+        },
+      },
+      isValidated: false,
     },
 
     // TODO: add more objects as i build more steps
   ];
 
-  useEffect(() => {
-    console.log(subData);
-  });
-
   const reducer = (state, action) => {
-    let updatedStepIndex;
+    const updatedStepIndex = state.findIndex(
+      (step) => step.step === action.step
+    );
     switch (action.type) {
       case 'UPDATE_SUBDATA':
-        updatedStepIndex = state.findIndex((step) => step.step === action.step);
         return [
           ...state.slice(0, updatedStepIndex),
           { ...state[updatedStepIndex], [action.field]: action.value },
+          ...state.slice(updatedStepIndex + 1),
+          // state.map(obj => obj.step === action.step ? {...obj, [action.field] : action.value } : obj)
+        ];
+      case 'UPDATE_ADDON':
+        const updatedPickAddons = { ...state[updatedStepIndex].pickAddons }; // Create a copy of pickAddons object
+        updatedPickAddons[action.field] = {
+          ...state[updatedStepIndex].pickAddons[action.field],
+          isActive: !state[updatedStepIndex].pickAddons[action.field].isActive, // Toggle isActive
+        };
+
+        return [
+          ...state.slice(0, updatedStepIndex),
+          { ...state[updatedStepIndex], pickAddons: updatedPickAddons },
           ...state.slice(updatedStepIndex + 1),
         ];
       default:
@@ -53,10 +77,20 @@ const StepsContainer = ({
     dispatch({ type: 'UPDATE_SUBDATA', step, field, value });
   };
 
+  const handleAddOnUpdate = (step, field) => {
+    dispatch({ type: 'UPDATE_ADDON', step, field });
+  };
+
   const handleStepNavigation = (type) => {
     if (type === 'previous' && stepCount !== 1) setStepCount(stepCount - 1);
-    else if (type === 'next' && subData[stepCount - 1].isValidated === true && stepCount < 4 ) { setStepCount(stepCount + 1); console.log(subData) }
-    else {
+    else if (
+      type === 'next' &&
+      subData[stepCount - 1].isValidated === true &&
+      stepCount < 4
+    ) {
+      setStepCount((prevStepCount) => prevStepCount + 1);
+      console.log(subData);
+    } else {
       return;
     }
   };
@@ -65,14 +99,35 @@ const StepsContainer = ({
     <div className='steps-container'>
       <div className='step-container'>
         {stepCount === 1 && (
-          <StepOne handleSubDataUpdate={handleSubDataUpdate} subData={subData} />
+          <StepOne
+            handleSubDataUpdate={handleSubDataUpdate}
+            subData={subData}
+          />
         )}
 
         {stepCount === 2 && (
           <StepTwo
+            subData={subData}
             subDuration={subDuration}
             setSubDuration={setSubDuration}
             handleSubDataUpdate={handleSubDataUpdate}
+          />
+        )}
+
+        {stepCount === 3 && (
+          <StepThree
+            subDuration={subDuration}
+            handleSubDataUpdate={handleSubDataUpdate}
+            handleAddOnUpdate={handleAddOnUpdate}
+            subData={subData}
+          />
+        )}
+
+        {stepCount === 4 && (
+          <StepFour
+            subData={subData}
+            subDuration={subDuration}
+            setStepCount={setStepCount}
           />
         )}
       </div>

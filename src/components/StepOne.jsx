@@ -1,40 +1,113 @@
 /* eslint-disable react/prop-types */
 
-const StepOne = ({handleSubDataUpdate}) => {
+import { useState } from 'react';
 
-  const inputData = [
-    { label: 'Name', id: 'name', placeholder: 'e.g Stephen King' },
-    { label: 'Email', id: 'email', placeholder: 'e.g stephenKing@lorem.com' },
-    { label: 'Phone Number', id: 'phone', placeholder: 'e.g +1 234 567 890' },
-  ]
+const StepOne = ({ handleSubDataUpdate, subData }) => {
+  const [inputData, setInputData] = useState([
+    {
+      label: 'Name',
+      id: 'name',
+      placeholder: 'e.g Stephen King',
+      regex: /^[a-zA-Z]+(?: [a-zA-Z]+)*$/,
+      errorMessage: '',
+    },
+    {
+      label: 'Email',
+      id: 'email',
+      placeholder: 'e.g stephenKing@lorem.com',
+      regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      errorMessage: '',
+    },
+    {
+      label: 'Phone Number',
+      id: 'phone',
+      placeholder: 'e.g +1 234 567 890',
+      regex: /^(\+\d{1,3})?[-. (]?\d{3}[-. )]?\d{3}[-. ]?\d{4}$/,
+      errorMessage: '',
+    },
+  ]);
 
+  const [validationState, setValidationState] = useState({
+    name: false,
+    email: false,
+    phone: false,
+  });
+
+  const handleValidation = (inputId, value) => {
+    const index = inputData.findIndex((input) => input.id === inputId);
+    const validationResult = inputData[index].regex.test(value.trim());
+
+    // Update the validationState using the functional form of setState
+
+    setInputData((prevInput) =>
+      prevInput.map((input, i) =>
+        i === index
+          ? {
+              ...input,
+              errorMessage: `${
+                validationResult ? '' : `Please enter a valid ${inputId}`
+              }`,
+            }
+          : input
+      )
+    );
+
+    setValidationState((prevState) => ({
+      ...prevState,
+      [inputId]: validationResult,
+    }));
+
+    // Update isValidated for the entire step
+    const allInputsValid =
+      validationResult &&
+      validationState.name &&
+      validationState.email &&
+      validationState.phone;
+    handleSubDataUpdate('Personal info', 'isValidated', allInputsValid);
+
+    // Display error message based on validation result
+    console.log(
+      validationResult
+        ? `true ${((validationResult, validationState[inputId]), inputId)}`
+        : `Error: Invalid ${inputId}`
+    );
+
+    console.log(validationState);
+  };
 
   return (
-    <div className="step">
-      <div className="step-info">
-
+    <div className='step'>
+      <div className='step-info'>
         <h1>Personal info</h1>
         <p>Please provide your name, email address, and phone number.</p>
-
       </div>
-      <form action="" className="step-one-form step-form">
-
-        {inputData.map(input => (
-
-        <div className="form-group" key={input.id}>
-          
-        <label htmlFor={input.id}>{input.label}</label>
-        <input type="text" id={input.id} placeholder={input.placeholder} onChange={(e) => handleSubDataUpdate('Personal info',input.id, e.target.value )} />
+      <form action='' className='step-one-form step-form'>
+        {inputData.map((input) => (
+          <div className='form-group' key={input.id}>
+            <div className='error-message smaller-text'>
+              {input.errorMessage}
+            </div>
+            <label htmlFor={input.id}>{input.label}</label>
+            <input
+              type='text'
+              id={input.id}
+              placeholder={input.placeholder}
+              value={subData[0][input.id]}
+              className={`${
+                subData[0][input.id] && !validationState[input.id]
+                  ? 'error'
+                  : ''
+              }`}
+              onChange={(e) =>
+                handleSubDataUpdate('Personal info', input.id, e.target.value)
+              }
+              onInput={(e) => handleValidation(input.id, e.target.value)}
+            />
           </div>
-          
         ))}
-
-        
-        
-        
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default StepOne
+export default StepOne;
