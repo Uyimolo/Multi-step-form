@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
+import ErrorAlert from './ErrorAlert';
 
 const StepsContainer = ({
   stepCount,
@@ -40,9 +41,9 @@ const StepsContainer = ({
       },
       isValidated: false,
     },
-
-    // TODO: add more objects as i build more steps
   ];
+
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleStepValidationState = (index, validationResult) => {
     setStepValidationState((prevState) =>
@@ -51,6 +52,14 @@ const StepsContainer = ({
       )
     );
   };
+
+  useEffect(() => {
+    const removeErrorAlert = setTimeout(() => {
+      setErrorMsg('');
+    }, 5000);
+
+    return () => clearTimeout(removeErrorAlert);
+  }, [errorMsg]);
 
   const reducer = (state, action) => {
     const updatedStepIndex = state.findIndex(
@@ -92,23 +101,37 @@ const StepsContainer = ({
   };
 
   const handleStepNavigation = (type) => {
-    if (type === 'previous' && stepCount !== 1) setStepCount(prevStepCount => prevStepCount - 1);
+    if (type === 'previous' && stepCount !== 1)
+      setStepCount((prevStepCount) => prevStepCount - 1);
     else if (
       type === 'next' &&
       stepValidationState[stepCount - 1].isValidated === true &&
       stepCount < 4
     ) {
       setStepCount((prevStepCount) => prevStepCount + 1);
+      setErrorMsg('');
       console.log(subData);
-    } 
-    else {
-      return;
+    } else {
+      if (stepCount === 1) {
+        setErrorMsg(
+          'To proceed, please make sure all input fields are filled properly.'
+        );
+      } else if (stepCount === 2) {
+        setErrorMsg('To proceed, please choose a plan that suits your needs.');
+      } else if (stepCount === 3) {
+        setErrorMsg(
+          'To proceed, please select at least one add-on from the available options.'
+        );
+      }
     }
   };
 
   return (
     <div className='steps-container'>
       <div className='step-container'>
+        {errorMsg && (
+          <ErrorAlert errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
+        )}
         {stepCount === 1 && (
           <StepOne
             handleSubDataUpdate={handleSubDataUpdate}

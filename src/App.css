@@ -133,6 +133,7 @@ h2 {
   color: var(--Cool-gray);
   background-color: transparent;
   font-size: 1em;
+  cursor: pointer;
 }
 
 .btn-comfirm {
@@ -151,6 +152,43 @@ h2 {
 .next-btn:hover {
   color: var(--White);
   background-color: var(--Purplish-blue);
+}
+
+.error-alert {
+  position: absolute;
+  width: 90%;
+  background-color: #f9818e;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 1rem;
+  z-index: 1;
+  border-radius: 0.5rem;
+}
+
+.error-alert p {
+  color: white;
+}
+
+@keyframes errorTimer {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.error-alert-timer {
+  animation: errorTimer 5s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 0.2rem;
+  background-color: var(--Pastel-blue);
+  border-radius: 0.5rem;
 }
 
 .step {
@@ -228,6 +266,7 @@ h2 {
   border: 2px solid var(--Light-gray);
   border-radius: 0.5rem;
   align-items: start;
+  cursor: pointer;
 }
 
 .plan-icon {
@@ -252,7 +291,7 @@ h2 {
   align-items: center;
   background-color: var(--Alabaster);
   border-radius: 0.5rem;
-  padding: .8rem 0;
+  padding: 0.8rem 0;
 }
 
 .month-year-toggler {
@@ -263,10 +302,11 @@ h2 {
   border-radius: 1rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .month-year-indicator {
-  width: .8rem;
-  height: .8rem;
+  width: 0.8rem;
+  height: 0.8rem;
   background-color: var(--White);
   border-radius: 50%;
   transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -289,6 +329,7 @@ h2 {
   border-radius: 0.5rem;
   gap: 1rem;
   position: relative;
+  cursor: pointer;
 }
 
 .add-on-active,
