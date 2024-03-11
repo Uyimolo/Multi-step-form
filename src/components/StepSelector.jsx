@@ -4,22 +4,10 @@ import { useEffect } from 'react';
 
 const StepSelector = ({ stepCount, setStepCount, stepValidationState }) => {
   const stepArray = [
-    {
-      count: 1,
-      title: 'YOUR INFO',
-    },
-    {
-      count: 2,
-      title: 'SELECT PLAN',
-    },
-    {
-      count: 3,
-      title: 'ADD-ONS',
-    },
-    {
-      count: 4,
-      title: 'SUMMARY',
-    },
+    { count: 1, title: 'YOUR INFO' },
+    { count: 2, title: 'SELECT PLAN' },
+    { count: 3, title: 'ADD-ONS' },
+    { count: 4, title: 'SUMMARY' },
   ];
 
   useEffect(() => {
@@ -27,7 +15,11 @@ const StepSelector = ({ stepCount, setStepCount, stepValidationState }) => {
   }, [stepValidationState]);
 
   const handleStepNavigation = (count) => {
-   
+    if (stepValidationState[count - 2].isValidated) {
+      setStepCount(count);
+    } else {
+      alert('Please fill in or select relevant info'); //placeholder, will create custom ui to show errors
+    }
   };
 
   return (
@@ -37,7 +29,7 @@ const StepSelector = ({ stepCount, setStepCount, stepValidationState }) => {
           <div
             className='step-selector'
             key={step.count}
-            onClick={() => handleStepNavigation(step)}>
+            onClick={() => handleStepNavigation(step.count)}>
             <div
               className={`step-number ${
                 stepCount === step.count && 'step-number-active'

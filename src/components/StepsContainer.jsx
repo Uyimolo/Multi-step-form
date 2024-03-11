@@ -100,7 +100,8 @@ const StepsContainer = ({
     ) {
       setStepCount((prevStepCount) => prevStepCount + 1);
       console.log(subData);
-    } else {
+    } 
+    else {
       return;
     }
   };
