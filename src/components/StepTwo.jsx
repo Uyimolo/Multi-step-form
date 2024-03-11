@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import arcadeIcon from '../assets/images/icon-arcade.svg';
 import advancedIcon from '../assets/images/icon-advanced.svg';
 import proIcon from '../assets/images/icon-pro.svg';
@@ -10,6 +10,7 @@ const StepTwo = ({
   setSubDuration,
   handleSubDataUpdate,
   subData,
+  handleStepValidationState,
 }) => {
   const planData = [
     { plan: 'Arcade', icon: arcadeIcon, amount: 9 },
@@ -24,23 +25,17 @@ const StepTwo = ({
   };
 
   const handlePlanUpdate = (plan, amount) => {
-    handleSubDataUpdate('Select plan', 'plan', plan);
-    handleSubDataUpdate('Select plan', 'amount', amount);
-    handleValidation();
+    handleSubDataUpdate('Select your plan', 'plan', plan);
+    handleSubDataUpdate('Select your plan', 'amount', amount);
   };
 
-  const prevSubData = useRef(subData);
-
   useEffect(() => {
-    if (prevSubData.current !== subData) {
-      handleValidation(); // Trigger validation if subData has changed
-      prevSubData.current = subData; // Update previous value to current value
-    }
+    handleValidation();
   }, [subData]);
 
   const handleValidation = () => {
     const validationResult = subData[1].plan ? true : false;
-    handleSubDataUpdate('Select plan', 'isValidated', validationResult);
+    handleStepValidationState(1, validationResult);
   };
 
   return (

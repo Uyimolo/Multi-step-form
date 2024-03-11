@@ -1,8 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import checkMark from '../assets/images/icon-checkmark.svg';
 
-const StepThree = ({ subDuration, handleAddOnUpdate, subData, handleSubDataUpdate }) => {
+const StepThree = ({
+  subDuration,
+  handleAddOnUpdate,
+  subData,
+  handleSubDataUpdate,
+  handleStepValidationState,
+}) => {
   const addOnsData = [
     {
       subDatapointer: 'onlineService',
@@ -25,16 +31,17 @@ const StepThree = ({ subDuration, handleAddOnUpdate, subData, handleSubDataUpdat
   ];
 
   useEffect(() => {
-    subData[2].pickAddons.onlineService.isActive ||
-    subData[2].pickAddons.largerStorage.isActive ||
-    subData[2].pickAddons.customizableProfile.isActive
-      ? handleSubDataUpdate('Pick add-ons', 'isValidated', true)
-      : handleSubDataUpdate('Pick add-ons', 'isValidated', false);
-
-    // subData[1].pickAddons.onlineService
-    //   ? handleSubDataUpdate('Select plan', 'isValidated', true)
-    //   : handleSubDataUpdate('Select plan', 'isValidated', false);
+    handleValidation();
   }, [subData]);
+
+  const handleValidation = () => {
+    const validationResult =
+      subData[2].pickAddons.onlineService.isActive ||
+      subData[2].pickAddons.largerStorage.isActive ||
+      subData[2].pickAddons.customizableProfile.isActive;
+
+    handleStepValidationState(2, validationResult);
+  };
 
   return (
     <div className='step'>
