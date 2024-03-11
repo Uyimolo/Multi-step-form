@@ -34,10 +34,14 @@ const StepFour = ({ subData, subDuration, setStepCount }) => {
       <div className='step-four-form step-form'>
         <div className='selected-plan'>
           <div>
-            <h2 className='selected-plan-details'>{`${subData[1].plan} (${
-              subDuration === 'monthly' ? 'Monthly' : 'Yearly'
-            })`}</h2>
-            <p className="small-text" onClick={() => setStepCount(2)}>Change</p>
+            <h2 className='selected-plan-details small-text'>{`${
+              subData[1].plan
+            } (${subDuration === 'monthly' ? 'Monthly' : 'Yearly'})`}</h2>
+            <p
+              className='small-text change-plan'
+              onClick={() => setStepCount(2)}>
+              Change
+            </p>
           </div>
           <h2>{planAmount}</h2>
         </div>
@@ -61,8 +65,10 @@ const StepFour = ({ subData, subDuration, setStepCount }) => {
         </div>
       </div>
       <div className='total-amount small-text'>
-        <p className="total-text small-text">{`Total (per ${subDuration === 'monthly' ? 'month' : 'year'})`}</p>
-        <p>{totalAmount}</p>
+        <p className='total-text small-text'>{`Total (per ${
+          subDuration === 'monthly' ? 'month' : 'year'
+        })`}</p>
+        <p className='total-amount-figure'>{totalAmount}</p>
       </div>
     </div>
   );

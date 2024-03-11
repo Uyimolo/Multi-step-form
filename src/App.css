@@ -26,9 +26,13 @@
   --White: hsl(0, 0%, 100%);
 }
 
+body {
+  background-color: var(--Alabaster);
+}
+
 p {
   color: var(--Cool-gray);
-  /* font-weight: bold; */
+  /* font-weight: 500; */
   font-size: 1em;
 }
 
@@ -38,6 +42,12 @@ p {
 
 .smaller-text {
   font-size: 0.7em;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 1rem;
+  color: var(--Marine-blue);
 }
 
 h2 {
@@ -113,17 +123,20 @@ h2 {
   margin: auto;
   display: flex;
   justify-content: space-between;
+  padding: 0rem 0 3rem 0;
 }
 
 .btn {
-  padding: 1rem;
-  width: 7rem;
-  border-radius: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.3rem;
   border: none;
   color: var(--Cool-gray);
-  /* font-weight: 500; */
-  background: var(--White);
+  background-color: transparent;
   font-size: 1em;
+}
+
+.btn-comfirm {
+  background-color: var(--Purplish-blue);
 }
 
 .btn:hover {
@@ -150,14 +163,8 @@ h2 {
   gap: 2rem;
   max-width: 350px;
   border-radius: 0.5rem;
-  background-color: var(--White);
-  box-shadow: 6px 12px 11px 1px rgba(0, 0, 0, 0.103);
-}
-
-.step-info h1 {
-  font-size: 1.6em;
-  margin-bottom: 1rem;
-  font-weight: 700;
+  background-color: #fff;
+  box-shadow: 0px 12px 15px 1px rgba(0, 0, 0, 0.089);
 }
 
 .step-form {
@@ -176,7 +183,7 @@ h2 {
 .form-group input {
   padding: 0.7rem;
   border-radius: 0.2rem;
-  border: 1px solid var(--Light-gray);
+  border: 2px solid var(--Light-gray);
 }
 
 .form-group input:hover {
@@ -189,17 +196,17 @@ h2 {
 
 .form-group label {
   color: var(--Marine-blue);
-  font-weight: bold;
+  font-weight: 550;
   font-size: 0.9em;
 }
 
 .form-group .error {
-  border:1px solid var(--Strawberry-red);
+  border: 1px solid var(--Strawberry-red);
 }
 
 .form-group .validated {
   position: absolute;
-  background-color: rgb(85, 248, 85);
+  background-color: rgb(55, 218, 55);
   width: 1rem;
   height: 1rem;
   display: grid;
@@ -214,7 +221,6 @@ h2 {
   color: var(--Strawberry-red);
 }
 
-
 .plan {
   display: flex;
   gap: 1rem;
@@ -222,6 +228,10 @@ h2 {
   border: 2px solid var(--Light-gray);
   border-radius: 0.5rem;
   align-items: start;
+}
+
+.plan-icon {
+  width: 2.3rem;
 }
 
 .plan-text {
@@ -240,14 +250,14 @@ h2 {
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: var(--Light-gray);
+  background-color: var(--Alabaster);
   border-radius: 0.5rem;
-  padding: 0.5rem 0;
+  padding: .8rem 0;
 }
 
 .month-year-toggler {
-  width: 3rem;
-  height: 1.5rem;
+  width: 2.3rem;
+  height: 1.2rem;
   padding: 0 0.2rem;
   background-color: var(--Marine-blue);
   border-radius: 1rem;
@@ -255,15 +265,15 @@ h2 {
   align-items: center;
 }
 .month-year-indicator {
-  width: 1rem;
-  height: 1rem;
+  width: .8rem;
+  height: .8rem;
   background-color: var(--White);
   border-radius: 50%;
   transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .sub-duration-yearly {
-  transform: translateX(1.6rem);
+  transform: translateX(1.1rem);
 }
 
 .yearly-plan-active,
@@ -283,7 +293,8 @@ h2 {
 
 .add-on-active,
 .plan-active {
-  background-color: var(--Magnolia);
+  background-color: var(--Alabaster);
+  border: 2px solid var(--Purplish-blue);
 }
 
 .pseudo-checkbox {
@@ -328,7 +339,7 @@ h2 {
 
 .step-four-form {
   padding: 1rem;
-  background-color: var(--Magnolia);
+  background-color: var(--Alabaster);
 }
 
 .selected-plan {
@@ -361,4 +372,7 @@ h2 {
   padding: 0 1rem;
 }
 
-
+.total-amount-figure {
+  color: var(--Purplish-blue);
+  font-weight: bold;
+}
