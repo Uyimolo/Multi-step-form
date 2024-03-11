@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
@@ -10,6 +10,8 @@ const StepsContainer = ({
   setStepCount,
   subDuration,
   setSubDuration,
+  stepValidationState,
+  setStepValidationState,
 }) => {
   const initialState = [
     {
@@ -17,10 +19,10 @@ const StepsContainer = ({
       name: '',
       email: '',
       phone: '',
-      isValidated: true,
+      isValidated: false,
     },
     {
-      step: 'Select plan',
+      step: 'Select your plan',
       plan: '',
       amount: '',
       isValidated: false,
@@ -41,6 +43,14 @@ const StepsContainer = ({
 
     // TODO: add more objects as i build more steps
   ];
+
+  const handleStepValidationState = (index, validationResult) => {
+    setStepValidationState((prevState) =>
+      prevState.map((step, i) =>
+        i === index ? { ...step, isValidated: validationResult } : step
+      )
+    );
+  };
 
   const reducer = (state, action) => {
     const updatedStepIndex = state.findIndex(
@@ -82,10 +92,10 @@ const StepsContainer = ({
   };
 
   const handleStepNavigation = (type) => {
-    if (type === 'previous' && stepCount !== 1) setStepCount(stepCount - 1);
+    if (type === 'previous' && stepCount !== 1) setStepCount(prevStepCount => prevStepCount - 1);
     else if (
       type === 'next' &&
-      subData[stepCount - 1].isValidated === true &&
+      stepValidationState[stepCount - 1].isValidated === true &&
       stepCount < 4
     ) {
       setStepCount((prevStepCount) => prevStepCount + 1);
@@ -102,6 +112,7 @@ const StepsContainer = ({
           <StepOne
             handleSubDataUpdate={handleSubDataUpdate}
             subData={subData}
+            handleStepValidationState={handleStepValidationState}
           />
         )}
 
@@ -111,6 +122,7 @@ const StepsContainer = ({
             subDuration={subDuration}
             setSubDuration={setSubDuration}
             handleSubDataUpdate={handleSubDataUpdate}
+            handleStepValidationState={handleStepValidationState}
           />
         )}
 
@@ -120,6 +132,7 @@ const StepsContainer = ({
             handleSubDataUpdate={handleSubDataUpdate}
             handleAddOnUpdate={handleAddOnUpdate}
             subData={subData}
+            handleStepValidationState={handleStepValidationState}
           />
         )}
 
@@ -145,7 +158,7 @@ const StepsContainer = ({
         <button
           className='next-btn btn'
           onClick={() => handleStepNavigation('next')}>
-          Next Step
+          {stepCount < 4 ? 'Next step' : 'Confirm'}
         </button>
       </div>
     </div>

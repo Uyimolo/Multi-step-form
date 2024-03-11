@@ -28,7 +28,7 @@
 
 p {
   color: var(--Cool-gray);
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 1em;
 }
 
