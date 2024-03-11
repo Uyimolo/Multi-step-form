@@ -15,7 +15,9 @@ const StepSelector = ({ stepCount, setStepCount, stepValidationState }) => {
   }, [stepValidationState]);
 
   const handleStepNavigation = (count) => {
-    if (stepValidationState[count - 2].isValidated) {
+    const index = count === 1 ? 0 : count - 2;
+
+    if (stepValidationState[index].isValidated) {
       setStepCount(count);
     } else {
       alert('Please fill in or select relevant info'); //placeholder, will create custom ui to show errors
