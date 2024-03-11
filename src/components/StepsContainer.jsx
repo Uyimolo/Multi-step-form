@@ -157,7 +157,7 @@ const StepsContainer = ({
           </button>
         )}
         <button
-          className='next-btn btn'
+          className={`next-btn btn ${stepCount === 4 ? 'btn-comfirm' : ''}`}
           onClick={() => handleStepNavigation('next')}>
           {stepCount < 4 ? 'Next step' : 'Confirm'}
         </button>

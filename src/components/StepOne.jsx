@@ -8,7 +8,7 @@ const StepOne = ({
   subData,
   handleStepValidationState,
 }) => {
-  const [inputData, setInputData] = useState([
+  const inputData = [
     {
       label: 'Name',
       id: 'name',
@@ -27,7 +27,7 @@ const StepOne = ({
       placeholder: 'e.g +1 234 567 890',
       regex: /^(\+\d{1,3})?[-. (]?\d{3}[-. )]?\d{3}[-. ]?\d{4}$/,
     },
-  ]);
+  ];
 
   const [validationState, setValidationState] = useState({
     name: false,
@@ -40,7 +40,6 @@ const StepOne = ({
   }, [subData]);
 
   useEffect(() => {
-    // console.log(validationState, stepValidationState);
     const allStepsValid =
       validationState.name && validationState.email && validationState.phone;
     handleStepValidationState(0, allStepsValid);
@@ -68,11 +67,11 @@ const StepOne = ({
       <form action='' className='step-one-form step-form'>
         {inputData.map((input) => (
           <div className='form-group' key={input.id}>
-            <div className='error-message smaller-text'>
+            <p className='error-message smaller-text'>
               {subData[0][input.id].length > 0 && !validationState[input.id]
                 ? `Please input a valid ${input.label}`
                 : ''}
-            </div>
+            </p>
             {validationState[input.id] && (
               <div className='validated'>
                 <img src={checkmarkIcon} alt='' />

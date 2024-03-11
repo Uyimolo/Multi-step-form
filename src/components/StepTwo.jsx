@@ -56,7 +56,7 @@ const StepTwo = ({
             <img src={plan.icon} alt='' className='plan-icon' />
             <div className='plan-text'>
               <h2 className='plan-title'>{plan.plan}</h2>
-              <p className='plan-amount '>{`$${
+              <p className='plan-amount small-text'>{`$${
                 subDuration === 'monthly' ? plan.amount : plan.amount * 10
               }/${subDuration === 'monthly' ? 'mo' : 'yr'}`}</p>
               {subDuration === 'yearly' && (
@@ -68,7 +68,7 @@ const StepTwo = ({
       </div>
       <div className='month-year'>
         <p
-          className={`${
+          className={` small-text ${
             subDuration === 'monthly' ? 'monthly-plan-active' : ''
           }`}>
           Monthly
