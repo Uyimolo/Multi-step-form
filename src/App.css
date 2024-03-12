@@ -32,8 +32,7 @@ body {
 
 p {
   color: var(--Cool-gray);
-  /* font-weight: 500; */
-  font-size: 1em;
+line-height: 1.6;  font-size: 1em;
 }
 
 .small-text {
@@ -416,4 +415,18 @@ h2 {
 .total-amount-figure {
   color: var(--Purplish-blue);
   font-weight: bold;
+}
+
+.step-five {
+  text-align: center;
+  padding: 5rem 1.2rem;
+}
+.confirmation-icon {
+  margin: auto;
+}
+
+.thank-you-icon {
+  display: block;
+  width: 3.2rem;
+  margin: auto;
 }
