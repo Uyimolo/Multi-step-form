@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef } from 'react';
 import checkMark from '../assets/images/icon-checkmark.svg';
+import StepNavButtons from './StepNavButtons';
 
 const StepThree = ({
   subDuration,
   handleAddOnUpdate,
   subData,
-  handleSubDataUpdate,
   handleStepValidationState,
+  handleStepNavigation,
+  stepCount,
 }) => {
   const addOnsData = [
     {
@@ -83,6 +85,13 @@ const StepThree = ({
             }`}</p>
           </div>
         ))}
+      </div>
+
+      <div className='large-screen-step-buttons'>
+        <StepNavButtons
+          stepCount={stepCount}
+          handleStepNavigation={handleStepNavigation}
+        />
       </div>
     </div>
   );

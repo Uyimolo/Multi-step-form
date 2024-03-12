@@ -6,6 +6,7 @@ import StepThree from './StepThree';
 import StepFour from './StepFour';
 import ErrorAlert from './ErrorAlert';
 import ConfirnationStep from './ConfirnationStep';
+import StepNavButtons from './StepNavButtons';
 
 const StepsContainer = ({
   stepCount,
@@ -140,6 +141,8 @@ const StepsContainer = ({
             handleSubDataUpdate={handleSubDataUpdate}
             subData={subData}
             handleStepValidationState={handleStepValidationState}
+            stepCount={stepCount}
+            handleStepNavigation={handleStepNavigation}
           />
         )}
 
@@ -150,6 +153,8 @@ const StepsContainer = ({
             setSubDuration={setSubDuration}
             handleSubDataUpdate={handleSubDataUpdate}
             handleStepValidationState={handleStepValidationState}
+            stepCount={stepCount}
+            handleStepNavigation={handleStepNavigation}
           />
         )}
 
@@ -160,6 +165,8 @@ const StepsContainer = ({
             handleAddOnUpdate={handleAddOnUpdate}
             subData={subData}
             handleStepValidationState={handleStepValidationState}
+            stepCount={stepCount}
+            handleStepNavigation={handleStepNavigation}
           />
         )}
 
@@ -168,28 +175,21 @@ const StepsContainer = ({
             subData={subData}
             subDuration={subDuration}
             setStepCount={setStepCount}
+            stepCount={stepCount}
+            handleStepNavigation={handleStepNavigation}
           />
         )}
 
         {stepCount === 5 && <ConfirnationStep />}
       </div>
 
-      <div className='next-prev-btns-container'>
-        {stepCount < 2 ? (
-          <div></div>
-        ) : (
-          <button
-            className='previous-btn btn'
-            onClick={() => handleStepNavigation('previous')}>
-            Go Back
-          </button>
-        )}
-        <button
-          className={`next-btn btn ${stepCount === 4 ? 'btn-comfirm' : ''}`}
-          onClick={() => handleStepNavigation('next')}>
-          {stepCount < 4 ? 'Next step' : 'Confirm'}
-        </button>
-      </div>
+
+      {stepCount < 5 && <div className='mobile-step-buttons'>
+        <StepNavButtons
+          stepCount={stepCount}
+          handleStepNavigation={handleStepNavigation}
+        />
+      </div>}
     </div>
   );
 };

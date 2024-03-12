@@ -20,7 +20,7 @@ const StepSelector = ({ stepCount }) => {
               {step.count}
             </div>
             <div className='step-selector-text'>
-              <p className='step-number'>STEP {step.count}</p>
+              <p className='step-number-text'>STEP {step.count}</p>
               <p className='step-title'>{step.title}</p>
             </div>
           </div>

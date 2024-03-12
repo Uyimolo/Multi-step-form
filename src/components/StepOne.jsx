@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import checkmarkIcon from '../assets/images/icon-checkmark.svg';
+import StepNavButtons from './StepNavButtons';
 
 const StepOne = ({
   handleSubDataUpdate,
   subData,
   handleStepValidationState,
+  handleStepNavigation,
+  stepCount
 }) => {
   const inputData = [
     {
@@ -95,6 +98,13 @@ const StepOne = ({
           </div>
         ))}
       </form>
+
+      <div className='large-screen-step-buttons'>
+        <StepNavButtons
+          stepCount={stepCount}
+          handleStepNavigation={handleStepNavigation}
+        />
+      </div>
     </div>
   );
 };

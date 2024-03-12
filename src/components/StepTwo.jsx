@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import arcadeIcon from '../assets/images/icon-arcade.svg';
 import advancedIcon from '../assets/images/icon-advanced.svg';
 import proIcon from '../assets/images/icon-pro.svg';
+import StepNavButtons from './StepNavButtons';
 
 const StepTwo = ({
   subDuration,
@@ -11,6 +12,8 @@ const StepTwo = ({
   handleSubDataUpdate,
   subData,
   handleStepValidationState,
+  handleStepNavigation,
+  stepCount,
 }) => {
   const planData = [
     { plan: 'Arcade', icon: arcadeIcon, amount: 9 },
@@ -83,6 +86,12 @@ const StepTwo = ({
           className={`${subDuration === 'yearly' ? 'yearly-plan-active' : ''}`}>
           Yearly
         </p>
+      </div>
+      <div className='large-screen-step-buttons'>
+        <StepNavButtons
+          stepCount={stepCount}
+          handleStepNavigation={handleStepNavigation}
+        />
       </div>
     </div>
   );
