@@ -5,6 +5,7 @@ import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
 import ErrorAlert from './ErrorAlert';
+import ConfirnationStep from './ConfirnationStep';
 
 const StepsContainer = ({
   stepCount,
@@ -105,12 +106,14 @@ const StepsContainer = ({
       setStepCount((prevStepCount) => prevStepCount - 1);
     else if (
       type === 'next' &&
-      stepValidationState[stepCount - 1].isValidated === true &&
-      stepCount < 4
+      stepCount < 4 &&
+      stepValidationState[stepCount - 1].isValidated === true
     ) {
       setStepCount((prevStepCount) => prevStepCount + 1);
       setErrorMsg('');
       console.log(subData);
+    } else if (stepCount === 4 && type === 'next') {
+      setStepCount((prevStepCount) => prevStepCount + 1);
     } else {
       if (stepCount === 1) {
         setErrorMsg(
@@ -167,6 +170,8 @@ const StepsContainer = ({
             setStepCount={setStepCount}
           />
         )}
+
+        {stepCount === 5 && <ConfirnationStep />}
       </div>
 
       <div className='next-prev-btns-container'>
