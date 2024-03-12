@@ -1,4 +1,12 @@
-const StepFour = ({ subData, subDuration, setStepCount }) => {
+import StepNavButtons from './StepNavButtons';
+
+const StepFour = ({
+  subData,
+  subDuration,
+  setStepCount,
+  handleStepNavigation,
+  stepCount,
+}) => {
   const planAmount = `$${
     subDuration === 'monthly'
       ? `${subData[1].amount}/mo`
@@ -69,6 +77,13 @@ const StepFour = ({ subData, subDuration, setStepCount }) => {
           subDuration === 'monthly' ? 'month' : 'year'
         })`}</p>
         <p className='total-amount-figure'>{totalAmount}</p>
+      </div>
+
+      <div className='large-screen-step-buttons'>
+        <StepNavButtons
+          stepCount={stepCount}
+          handleStepNavigation={handleStepNavigation}
+        />
       </div>
     </div>
   );

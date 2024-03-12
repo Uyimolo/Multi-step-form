@@ -32,7 +32,8 @@ body {
 
 p {
   color: var(--Cool-gray);
-line-height: 1.6;  font-size: 1em;
+  line-height: 1.6;
+  font-size: 1em;
 }
 
 .small-text {
@@ -52,10 +53,6 @@ h1 {
 h2 {
   font-size: 1em;
   color: var(--Marine-blue);
-}
-
-#root {
-  max-width: 1280px;
 }
 
 .app {
@@ -116,6 +113,10 @@ h2 {
   min-height: 450px;
 }
 
+.large-screen-step-buttons {
+  display: none;
+}
+
 .next-prev-btns-container {
   width: 90%;
   max-width: 350px;
@@ -123,6 +124,10 @@ h2 {
   display: flex;
   justify-content: space-between;
   padding: 0rem 0 3rem 0;
+}
+
+.next-prev-btns-container .no-btn {
+  display: none;
 }
 
 .btn {
@@ -135,7 +140,7 @@ h2 {
   cursor: pointer;
 }
 
-.btn-comfirm {
+.btn.btn-comfirm {
   background-color: var(--Purplish-blue);
 }
 
@@ -154,9 +159,10 @@ h2 {
 }
 
 .error-alert {
-  position: absolute;
+  position: fixed;
   width: 90%;
-  background-color: #f9818e;
+  max-width: 450px;
+  background-color: var(--Marine-blue);
   top: 1rem;
   left: 0;
   right: 0;
@@ -168,6 +174,7 @@ h2 {
 
 .error-alert p {
   color: white;
+  text-align: center;
 }
 
 @keyframes errorTimer {
@@ -186,7 +193,7 @@ h2 {
   left: 0;
   z-index: 1;
   height: 0.2rem;
-  background-color: var(--Pastel-blue);
+  background-color: var(--Strawberry-red);
   border-radius: 0.5rem;
 }
 
@@ -234,7 +241,7 @@ h2 {
 .form-group label {
   color: var(--Marine-blue);
   font-weight: 550;
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 .form-group .error {
@@ -254,7 +261,7 @@ h2 {
 
 .form-group .error-message {
   position: absolute;
-  right: 0;
+  right: 0rem;
   color: var(--Strawberry-red);
 }
 
@@ -429,4 +436,176 @@ h2 {
   display: block;
   width: 3.2rem;
   margin: auto;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  body {
+    display: grid;
+    place-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Magnolia);
+  }
+
+  .app {
+    max-width: 650px;
+    height: 900px;
+    padding: 1rem;
+    border-radius: 2rem;
+    margin: auto;
+    background-color: var(--White);
+    box-shadow: 0px 12px 15px 1px rgba(0, 0, 0, 0.089);
+  }
+
+  .step-selectors-container {
+    border-radius: 1rem;
+  }
+
+  .step-selectors {
+    max-width: 550px;
+    padding: 0 2rem;
+    justify-content: space-between;
+  }
+
+  .step-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .step-selector .step-selector-text {
+    display: block;
+  }
+
+  .step-selector-text .step-number-text {
+    color: var(--Light-gray);
+  }
+
+  .step-selector-text .step-title {
+    color: var(--White);
+  }
+
+  .step-container {
+    background: var(--White);
+    padding: 0;
+    position: relative;
+  }
+
+  .step {
+    max-width: 550px;
+    height: 700px;
+    transform: translateY(0);
+    box-shadow: none;
+    background-color: var(--White);
+    margin: auto;
+    padding: 2rem 2rem 0;
+  }
+
+  .mobile-step-buttons {
+    display: none;
+  }
+
+  .large-screen-step-buttons {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+    margin: auto;
+    padding: 0 2rem;
+    left: 0;
+    display: block;
+  }
+
+  .next-prev-btns-container {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 0 0rem;
+  }
+
+  .form-group {
+    gap: 1rem;
+  }
+
+  .form-group input {
+    padding: 1rem;
+  }
+
+  .step-five {
+    padding: 5rem 4rem;
+    align-items: center;
+  }
+  .confirmation-icon {
+    margin: 0 auto;
+  }
+
+  .step-five p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    flex-direction: row;
+    align-items: baseline;
+    max-height: 600px;
+    max-width: 950px;
+  }
+
+  .step-selectors-container {
+    background-image: url('./assets/images/bg-sidebar-desktop.svg');
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 40%;
+    min-height: 500px;
+    height: 100%;
+    max-width: 300px;
+  }
+
+  .step-selectors {
+    flex-direction: column;
+    padding: 0;
+    gap: 2rem;
+  }
+
+  .step-selector {
+    flex-direction: row;
+  }
+
+  .steps-container {
+    width: 100%;
+    margin: auto;
+    padding: 2rem 0 0;
+    height: 100%;
+    position: relative;
+    max-width: 600px;
+  }
+
+  .next-prev-btns-container {
+    max-width: 600px;
+    bottom: 2rem;
+  }
+
+  .step {
+    max-width: 600px;
+    height: 550px;
+  }
+
+  .step-two-form {
+    flex-direction: row;
+  }
+
+  .plan {
+    flex-direction: column;
+    width: 100%;
+    gap: 2.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .add-on {
+    padding: 1.4rem 1rem;
+  }
 }
