@@ -15,18 +15,21 @@ const StepTwo = ({
   handleStepNavigation,
   stepCount,
 }) => {
+  // life of the components UI
   const planData = [
     { plan: 'Arcade', icon: arcadeIcon, amount: 9 },
     { plan: 'Advanced', icon: advancedIcon, amount: 12 },
     { plan: 'Pro', icon: proIcon, amount: 15 },
   ];
 
+  // sets duration of subscription, useful in 3rd and 4th components
   const handleSubDuration = () => {
     subDuration === 'monthly'
       ? setSubDuration('yearly')
       : setSubDuration('monthly');
   };
 
+  // set plan in subData
   const handlePlanUpdate = (plan, amount) => {
     handleSubDataUpdate('Select your plan', 'plan', plan);
     handleSubDataUpdate('Select your plan', 'amount', amount);

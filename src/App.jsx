@@ -8,6 +8,8 @@ function App() {
   const [stepCount, setStepCount] = useState(1);
   const [subDuration, setSubDuration] = useState('monthly');
 
+  // main validation state, each component is locally validated then setStepValidationState is called upon to update the relevant field
+  // NOTE: step 4 doesnt require validation since its just a summary
   const [stepValidationState, setStepValidationState] = useState([
     { step: 'Personal info', isValidated: false },
     { step: 'Select your plan', isValidated: false },

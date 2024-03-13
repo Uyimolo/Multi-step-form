@@ -16,6 +16,7 @@ const StepsContainer = ({
   stepValidationState,
   setStepValidationState,
 }) => {
+  // life of the whole setup
   const initialState = [
     {
       step: 'Personal info',
@@ -55,6 +56,7 @@ const StepsContainer = ({
     );
   };
 
+  //remove error alert after 5 seconds
   useEffect(() => {
     const removeErrorAlert = setTimeout(() => {
       setErrorMsg('');
@@ -68,6 +70,7 @@ const StepsContainer = ({
       (step) => step.step === action.step
     );
     switch (action.type) {
+      // update subData objects that are not nested
       case 'UPDATE_SUBDATA':
         return [
           ...state.slice(0, updatedStepIndex),
@@ -75,6 +78,7 @@ const StepsContainer = ({
           ...state.slice(updatedStepIndex + 1),
           // state.map(obj => obj.step === action.step ? {...obj, [action.field] : action.value } : obj)
         ];
+        // update nested addon Object in subData
       case 'UPDATE_ADDON':
         const updatedPickAddons = { ...state[updatedStepIndex].pickAddons }; // Create a copy of pickAddons object
         updatedPickAddons[action.field] = {
@@ -115,6 +119,7 @@ const StepsContainer = ({
       console.log(subData);
     } else if (stepCount === 4 && type === 'next') {
       setStepCount((prevStepCount) => prevStepCount + 1);
+      // show different error messages for each step
     } else {
       if (stepCount === 1) {
         setErrorMsg(
@@ -183,7 +188,8 @@ const StepsContainer = ({
         {stepCount === 5 && <ConfirnationStep />}
       </div>
 
-
+{/* step navigation buttons for mobile, had to do this because both the positioning for mobile and desktop view where really different 
+and absolute positioning was been messed up by the height i added to step-container for centering */}
       {stepCount < 5 && <div className='mobile-step-buttons'>
         <StepNavButtons
           stepCount={stepCount}

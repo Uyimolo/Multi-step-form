@@ -9,8 +9,9 @@ const StepOne = ({
   subData,
   handleStepValidationState,
   handleStepNavigation,
-  stepCount
+  stepCount,
 }) => {
+  // life of the component, mapped through to form UI
   const inputData = [
     {
       label: 'Name',
@@ -32,16 +33,20 @@ const StepOne = ({
     },
   ];
 
+  // internal validation state, if all is validated then stepValidationState in app component is called and relevant field is set to true
   const [validationState, setValidationState] = useState({
     name: false,
     email: false,
     phone: false,
   });
 
+// used a useEffect for validation because i needed to work with the most recent state changes and reacts asynchronous state updates kept batching up updates
   useEffect(() => {
     handleValidation();
   }, [subData]);
 
+
+  // check if all fields are valid and update stepValidationState 
   useEffect(() => {
     const allStepsValid =
       validationState.name && validationState.email && validationState.phone;

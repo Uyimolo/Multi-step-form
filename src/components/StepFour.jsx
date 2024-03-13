@@ -1,5 +1,5 @@
 import StepNavButtons from './StepNavButtons';
-
+// SHOWS A SUMMARY OF ALL PREVIOUS PLAN CHOICES FROM OTHER STEPS.
 const StepFour = ({
   subData,
   subDuration,

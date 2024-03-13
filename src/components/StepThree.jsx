@@ -11,6 +11,7 @@ const StepThree = ({
   handleStepNavigation,
   stepCount,
 }) => {
+  // life of component UI
   const addOnsData = [
     {
       subDatapointer: 'onlineService',

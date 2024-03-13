@@ -1,5 +1,6 @@
 const StepNavButtons = ({ stepCount, handleStepNavigation }) => {
   return (
+    // hide previous button if stepCount is 1
     <div className='next-prev-btns-container'>
       {stepCount < 2 ? (
         <div></div>
